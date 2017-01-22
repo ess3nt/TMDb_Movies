@@ -34,11 +34,28 @@ module.exports = {
     })
   ],
 
+  resolve: {
+    modulesDirectories: ['node_modules'],
+    extensions: ['', '.js', '.jsx']
+  },
+
+  resolveLoader: {
+    modulesDirectories: ['node_modules'],
+    moduleTemplates: ['*-loader', '*'],
+    extensions: ['', '.js', '.jsx']
+  },
+
+
   module: {
     loaders: [
   { test: /\.js?$/,
     loader: 'babel',
     include: path.join(__dirname, 'client')
+  },
+  {
+    test: /\.jsx?$/,
+    exclude: /node_modules/,
+    loader: 'babel',
   },
   { test: /\.scss$/,
     loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader!postcss-loader"),
@@ -48,12 +65,6 @@ module.exports = {
     loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader'),
     include: [path.join(__dirname, 'client')
     ]
-  },
-  { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-    loader: "url-loader?limit=10000&minetype=application/font-woff"
-  },
-  { test: /\.(jpg|png|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-    loader: "file-loader"
   }
 ]
   }
