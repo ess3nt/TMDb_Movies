@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+  display: block;
+  width: 100%;
+}
+.root{
+  width: 100%;
+}
+.wrapper{
+  padding-top: 60px;
+  display: block;
+  margin: auto;
+}
+
+.App {
+  display: block;
+  width: 99.5%;
+  margin: auto;
+}
+
+.toolbar {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.Nav_Bar_Search{
+  min-width: 350px;
+}
+
+.search_bar_icon{
+  height: 65% !important;
+}
+
+
+
