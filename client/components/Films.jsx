@@ -6,12 +6,14 @@ import { Link } from 'react-router';
 
 const styles = {
     root: {
-        display: 'flex',
+        display: 'block',
         flexWrap: 'wrap',
-        justifyContent: 'space-around'
+        justifyContent: 'flex-start',
+        width: '100%'
     },
     gridList: {
-        overflowY: 'auto'
+        overflowY: 'auto',
+        minWith: '300px'
     }
 };
 
@@ -49,13 +51,16 @@ const Films = ({
             {filmsIds.map(id => (
                 <Link to={`/film/${id}`} key={id}>
                     <GridTile
+                        style={{ width: '100%' }}
                         title={films[id].release_date ?
                             `${films[id].original_title} (${films[id].release_date.substring(0, 4)})` :
                             films[id].original_title
                         }
                         subtitle={matchGenres(films[id].genre_ids)}
                         actionIcon={
-                            <IconButton onClick={e => toggleFilmToFavoritesHandler(e, films[id])}>
+                            <IconButton
+                                onClick={e => toggleFilmToFavoritesHandler(e, films[id])}
+                            >
                                 <StarBorder color={favoritesFilmsIds.indexOf(id) >= 0 ? 'yellow' : 'white'} />
                             </IconButton>
                         }

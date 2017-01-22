@@ -29,7 +29,7 @@ class GridOfFilms extends Component {
                 threshold={200}
                 loadMore={this.loadItemsHandler}
                 hasMore={this.state.hasMoreItems}
-                loader={<CircularProgress
+                loader={isSearch ? null : <CircularProgress
                     size={80}
                     thickness={5}
                     style={{

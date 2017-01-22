@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
-import { browserHistory } from 'react-router';
+import { Link } from 'react-router';
 
 import { toggleFilmToFavorites } from '../actions';
 import Films from '../components/Films';
@@ -48,9 +48,11 @@ class FavoritesFilms extends Component {
         const { filmsIds, films, genresById } = this.props;
         return (
             <Paper style={styles.paper} zDepth={5}>
-                <IconButton style={styles.closeIcon} onClick={() => browserHistory.goBack()}>
-                    <NavigationClose style={styles.closeIcon} color="grey" />
-                </IconButton>
+                <Link to="/">
+                    <IconButton style={styles.closeIcon} >
+                        <NavigationClose style={styles.closeIcon} color="grey" />
+                    </IconButton>
+                </Link>
                 <h2 style={styles.section}>Favorites</h2>
                 <Films
                     imgSize="300"

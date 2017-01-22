@@ -4,7 +4,7 @@ import IconButton from 'material-ui/IconButton';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import { GridList, GridTile } from 'material-ui/GridList';
-import { Link, browserHistory } from 'react-router';
+import { Link } from 'react-router';
 
 const style = {
     paper: {
@@ -108,9 +108,11 @@ const Card = ({ film, toggleFilmToFavorites, favoritesFilmsIds, recommendations 
 
     return (
         <Paper style={style.paper} zDepth={5}>
-            <IconButton style={style.closeIcon} onClick={() => browserHistory.goBack()}>
-                <NavigationClose style={style.closeIcon} color="grey" />
-            </IconButton>
+            <Link to="/">
+                <IconButton style={style.closeIcon} >
+                    <NavigationClose style={style.closeIcon} color="grey" />
+                </IconButton>
+            </Link>
             <div style={style.wrapper}>
                 <div style={style.mainPoster}>
                     <img style={style.poster} src={`https://image.tmdb.org/t/p/w300/${film.poster_path}`} alt={film.title} />
