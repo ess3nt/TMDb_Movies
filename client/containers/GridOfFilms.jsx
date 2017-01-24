@@ -16,6 +16,7 @@ class GridOfFilms extends Component {
         };
         this.loadItemsHandler = this.loadItemsHandler.bind(this);
     }
+
     loadItemsHandler() {
         this.props.getPopular(this.props.page + 1);
     }
@@ -45,6 +46,7 @@ class GridOfFilms extends Component {
                     genresById={genresById}
                     toggleFilmToFavorites={this.props.toggleFilmToFavorites}
                     favoritesFilmsIds={this.props.favoritesFilmsIds}
+                    isSearch={isSearch}
                 />
             </InfiniteScroll>
         </div>
@@ -52,14 +54,17 @@ class GridOfFilms extends Component {
     }
 }
 
-const mapStateToProps = (state, { location }) => ({
-    filmsIds: location.pathname !== '/search' ? state.popularFilms.ids : state.searchFilms.ids,
-    films: location.pathname !== '/search' ? state.popularFilms.popularFilmsById : state.searchFilms.searchFilmsById,
-    page: location.pathname !== '/search' ? state.popularFilms.page : state.searchFilms.page,
-    isSearch: location.pathname === '/search',
-    genresById: state.genres.genresById,
-    favoritesFilmsIds: state.favoritesFilms.ids
-});
+const mapStateToProps = (state, { location }) => {
+    const isSearch = location.pathname.substr(0, 7) === '/search';
+    return {
+        filmsIds: isSearch ? state.searchFilms.ids : state.popularFilms.ids,
+        films: isSearch ? state.searchFilms.searchFilmsById : state.popularFilms.popularFilmsById,
+        page: isSearch ? state.searchFilms.page : state.popularFilms.page,
+        isSearch,
+        genresById: state.genres.genresById,
+        favoritesFilmsIds: state.favoritesFilms.ids
+    };
+};
 
 export default withRouter(connect(mapStateToProps, {
     getPopular,

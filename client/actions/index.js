@@ -1,4 +1,3 @@
-// import shortid from 'shortid'
 import { normalize } from 'normalizr';
 
 import { GOT_POPULAR,

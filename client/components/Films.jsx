@@ -23,7 +23,8 @@ const Films = ({
     genresById,
     toggleFilmToFavorites,
     favoritesFilmsIds,
-    imgSize
+    imgSize,
+    isSearch
 }) => {
     const matchGenres = (genres) => {
         const setOfGenres = [];
@@ -49,7 +50,7 @@ const Films = ({
             cols={imgSize === '500' ? 5 : 6}
         >
             {filmsIds.map(id => (
-                <Link to={`/film/${id}`} key={id}>
+                <Link to={isSearch ? `/search/film/${id}` : `/film/${id}`} key={id}>
                     <GridTile
                         style={{ width: '100%' }}
                         title={films[id].release_date ?
@@ -84,5 +85,6 @@ Films.propTypes = {
     genresById: React.PropTypes.objectOf(React.PropTypes.any).isRequired,
     toggleFilmToFavorites: React.PropTypes.func.isRequired,
     favoritesFilmsIds: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
-    imgSize: React.PropTypes.string.isRequired
+    imgSize: React.PropTypes.string.isRequired,
+    isSearch: React.PropTypes.bool.isRequired
 };

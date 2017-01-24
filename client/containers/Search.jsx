@@ -79,7 +79,7 @@ class Search extends Component {
         ));
         return (
             <AutoComplete
-                className="Nav_Bar_Search"
+                className="nav_bar_search_input"
                 hintText="Search"
                 searchText={this.state.searchText}
                 onUpdateInput={this.handleUpdateInput}

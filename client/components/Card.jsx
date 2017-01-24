@@ -4,9 +4,9 @@ import IconButton from 'material-ui/IconButton';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import { GridList, GridTile } from 'material-ui/GridList';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 
-const style = {
+const styles = {
     paper: {
         height: '540px',
         width: '90%',
@@ -17,6 +17,22 @@ const style = {
         zIndex: 150,
         top: 0,
         left: '60px'
+    },
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+        width: '95%',
+        margin: 'auto'
+    },
+    gridList: {
+        display: 'flex',
+        flexWrap: 'nowrap',
+        overflowX: 'hidden'
+    },
+    titleStyle: {
+        color: 'white',
+        fontSize: '10px'
     },
     closeIcon: {
         position: 'absolute',
@@ -71,25 +87,6 @@ const style = {
     }
 };
 
-const styles = {
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        width: '95%',
-        margin: 'auto'
-    },
-    gridList: {
-        display: 'flex',
-        flexWrap: 'nowrap',
-        overflowX: 'hidden'
-    },
-    titleStyle: {
-        color: 'white',
-        fontSize: '10px'
-    }
-};
-
 const Card = ({ film, toggleFilmToFavorites, favoritesFilmsIds, recommendations }) => {
     const matchGenres = (genres) => {
         const setOfGenres = [];
@@ -107,27 +104,25 @@ const Card = ({ film, toggleFilmToFavorites, favoritesFilmsIds, recommendations 
     };
 
     return (
-        <Paper style={style.paper} zDepth={5}>
-            <Link to="/">
-                <IconButton style={style.closeIcon} >
-                    <NavigationClose style={style.closeIcon} color="grey" />
-                </IconButton>
-            </Link>
-            <div style={style.wrapper}>
-                <div style={style.mainPoster}>
-                    <img style={style.poster} src={`https://image.tmdb.org/t/p/w300/${film.poster_path}`} alt={film.title} />
-                    <IconButton style={style.star} onClick={() => toggleFilmToFavorites(film)}>
-                        <StarBorder style={style.star} color={favoritesFilmsIds.indexOf(film.id) >= 0 ? 'yellow' : 'white'} />
+        <Paper style={styles.paper} zDepth={5}>
+            <IconButton style={styles.closeIcon} onClick={() => browserHistory.goBack()} >
+                <NavigationClose style={styles.closeIcon} color="grey" />
+            </IconButton>
+            <div style={styles.wrapper}>
+                <div style={styles.mainPoster}>
+                    <img style={styles.poster} src={`https://image.tmdb.org/t/p/w300/${film.poster_path}`} alt={film.title} />
+                    <IconButton style={styles.star} onClick={() => toggleFilmToFavorites(film)}>
+                        <StarBorder style={styles.star} color={favoritesFilmsIds.indexOf(film.id) >= 0 ? 'yellow' : 'white'} />
                     </IconButton>
                 </div>
-                <h3 style={style.title}>
+                <h3 style={styles.title}>
                     {film.release_date ?
                     `${film.original_title} (${film.release_date.substring(0, 4)})` :
                     film.original_title}
                 </h3>
-                <p style={style.genres}>{matchGenres(film.genres)}</p>
-                <p style={style.description}>{film.overview}</p>
-                {film.adult ? <img style={style.adults} src="http://sfera3d.net/upload/18.png" alt="adults only" /> : null }
+                <p style={styles.genres}>{matchGenres(film.genres)}</p>
+                <p style={styles.description}>{film.overview}</p>
+                {film.adult ? <img style={styles.adults} src="http://sfera3d.net/upload/18.png" alt="adults only" /> : null }
             </div>
             <div style={styles.root}>
                 <GridList style={styles.gridList} cols={1}>
