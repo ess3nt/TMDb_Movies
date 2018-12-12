@@ -45,7 +45,7 @@ File > Project Settings... > Shared Project Settings > Build System > Legacy Bui
 
 ## Release Beta Testing
 
-Configure _.env.|staging|development|production|_ based on _.env.example_ from root project directory
+Configure `.env.|staging|development|production|` based on `.env.example` from root project directory
 
 ### Test Flight
 
